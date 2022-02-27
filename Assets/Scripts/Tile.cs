@@ -11,6 +11,13 @@ public class Tile : MonoBehaviour
     public int tileNumber = 1;
     public Color tileColor;
     public TextMeshProUGUI tileNoText;
+    private Button tileButton;
+
+    private void Start()
+    {
+        tileButton = gameObject.GetComponent<Button>();
+        tileButton.onClick.AddListener(OpenTile);
+    }
 
     public void SetPosition(int row, int col)
     {
