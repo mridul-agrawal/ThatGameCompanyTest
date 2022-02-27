@@ -34,6 +34,8 @@ public class GridManager : MonoBehaviour
                 newTile.transform.SetParent(newRow.transform);
 
                 newTile.GetComponent<Tile>().SetPosition(row, col);
+                newTile.GetComponent<Tile>().GenerateTileNo(cols);
+
                 Grid[row,col] = newTile.GetComponent<Tile>();
             }
         }
