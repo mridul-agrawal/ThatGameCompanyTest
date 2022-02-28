@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Tile : MonoBehaviour
 {
     public int rowNo;
     public int colNo;
     public int tileNumber = 1;
-    public Color tileColor;
-    public TextMeshProUGUI tileNoText;
+    private Color tileColor;
+    [SerializeField]
+    private TextMeshProUGUI tileNoText;
     private Button tileButton;
+    public bool isOpen;
+
+    public event Action<int, int> OnClickTile;
 
     private void Start()
     {
         tileButton = gameObject.GetComponent<Button>();
         tileButton.onClick.AddListener(OpenTile);
+        isOpen = false;
     }
 
     public void SetPosition(int row, int col)
@@ -32,13 +38,19 @@ public class Tile : MonoBehaviour
 
     public void GenerateTileColor()
     {
-        tileColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        tileColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+    }
+
+    public void OnTileClick()
+    {
+        OnClickTile?.Invoke(rowNo,colNo);
     }
 
     public void OpenTile()
     {
         tileNoText.text = tileNumber.ToString();
         gameObject.GetComponent<Image>().color = tileColor;
+        isOpen = true;
     }
 
 }

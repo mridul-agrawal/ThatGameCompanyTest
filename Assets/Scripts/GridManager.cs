@@ -7,13 +7,13 @@ public class GridManager : MonoBehaviour
 {
     public int rows;
     public int cols;
+    public int AOI;
     [SerializeField]
     private GameObject Row;
     [SerializeField]
-    private GameObject Tile;
+    private Tile Tile;
     [HideInInspector]
     public Tile[,] Grid;
-    
 
     private void Start()
     {
@@ -33,13 +33,31 @@ public class GridManager : MonoBehaviour
                 var newTile = Instantiate(Tile, transform.position, Quaternion.identity);
                 newTile.transform.SetParent(newRow.transform);
 
-                newTile.GetComponent<Tile>().SetPosition(row, col);
-                newTile.GetComponent<Tile>().GenerateTileNo(cols);
-                newTile.GetComponent<Tile>().GenerateTileColor();
+                newTile.SetPosition(row, col);
+                newTile.GenerateTileNo(cols);
+                newTile.GenerateTileColor();
+                newTile.OnClickTile += OpenTiles;
                 //newTile.GetComponent<Tile>().OpenTile();
 
                 Grid[row,col] = newTile.GetComponent<Tile>();
             }
         }
     }
+
+    public void OpenTiles(int row, int col)
+    {
+        for (int a = -AOI; a <= AOI; a++)
+        {
+            for (int b = -AOI; b <= AOI; b++)
+            {
+                if (row + a < 0 || col + b < 0 || row + a > rows - 1 || col + b > cols - 1 || Grid[row + a, col + b].isOpen)
+                {
+                    continue;
+                }
+                Grid[row + a, col + b].OpenTile();
+                Grid[row + a, col + b].OnClickTile -= OpenTiles;
+            }
+        }
+    }
+
 }
