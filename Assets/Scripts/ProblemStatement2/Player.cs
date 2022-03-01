@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
         SubscribeToEvents();
     }
 
+    // Initializes variables for Player.
     private void InitializePlayer()
     {
         primaryWeapon1 = null;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         equippedWeapon = null;
     }
 
+    // Subscribe to Input Events.
     private void SubscribeToEvents()
     {
         InputManager.OnPickWeaponInput += PickWeapon;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
         InputManager.OnReloadInput += ReloadEquippedWeapon;
     }
 
+    // This method picks up a weapon and updates the playerweapon slot and UI accordingly.
     private void PickWeapon(WeaponController weaponToBePicked)
     {
         if(weaponToBePicked.Model.Type == WeaponType.Primary)
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
         UIHandler.Instance.UpdateWeaponUI(weaponToBePicked);
     }
 
+    // Logic for picking up a primary weapon and updating weapon slots.
     private void PickUpPrimaryWeapon(WeaponController weaponToBePicked)
     {
         if (primaryWeapon1 == null)
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Logic for picking up a secondary weapon and updating weapon slots.
     private void PickUpSecondaryWeapon(WeaponController weaponToBePicked)
     {
         if(secondaryWeapon == null)
@@ -86,6 +91,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Method to drop a weapon from the inventory.
     private void DropWeapon(WeaponController weaponToDrop)
     {
         if(equippedWeapon == weaponToDrop)
@@ -107,11 +113,13 @@ public class Player : MonoBehaviour
         weaponToDrop.Model.SlotType = WeaponSlotType.None;
     }
 
+    // Method to equip another weapon from inventory.
     private void SwitchWweapon(WeaponController weaponToEquip)
     {
         equippedWeapon = weaponToEquip;
     }
 
+    // This method attacks according to the weapon equipped.
     private void Attack()
     {
         if(equippedWeapon != null)
@@ -124,16 +132,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    // This method  is called when no weapon is equipped.
     private void MeleeAttack()
     {
 
     }
 
+    // This is used for reloading the equipped weapon.
     private void ReloadEquippedWeapon()
     {
         if (equippedWeapon != null) equippedWeapon.Reload();
     }
 
+    // This method is called when our player takes damage.
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -143,11 +154,13 @@ public class Player : MonoBehaviour
         }
     }
 
+
     private void OnDisable()
     {
         DeSubscribeToEvents();
     }
 
+    // Used to Unsubscribe from Input Events.
     private void DeSubscribeToEvents()
     {
         InputManager.OnPickWeaponInput -= PickWeapon;

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// This class loads weapon data from Scriptable Objects and is responsible for storing and handling the data.
+/// </summary>
 public class WeaponModel 
 {
     public WeaponModel(WeaponSO weaponSO)

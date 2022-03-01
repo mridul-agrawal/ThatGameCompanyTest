@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// This Class will trigger various events according to the input recieved.
+/// </summary>
 public class InputManager : SingletonGeneric<InputManager>
 {
     public static event Action<WeaponController> OnPickWeaponInput;

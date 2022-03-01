@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// This class is responsible for updating the weapon Slots UI and display weapon ammo accurately.
+/// </summary>
 public class UIHandler : SingletonGeneric<UIHandler>
 {
     public Sprite PrimaryWeapon1Sprite;
@@ -13,7 +16,7 @@ public class UIHandler : SingletonGeneric<UIHandler>
     public Sprite SecondaryWeaponSprite;
     public TextMeshProUGUI AmmoTextSW;
 
-
+    // This method takes a weapon as an input and updates the weapon slot UI accordinglly.
     public void UpdateWeaponUI(WeaponController weapon)
     {
         if(weapon.Model.SlotType == WeaponSlotType.PrimaryWeapon1)
@@ -34,6 +37,7 @@ public class UIHandler : SingletonGeneric<UIHandler>
         }
     }
 
+    // Deletes a weapon reference from the weapon slots UI.
     public void DeleteUIReference(WeaponController weapon)
     {
         if (weapon.Model.SlotType == WeaponSlotType.PrimaryWeapon1)
@@ -53,6 +57,7 @@ public class UIHandler : SingletonGeneric<UIHandler>
         }
     }
 
+    // Updates Ammo UI for a given weapon.
     public void UpdateAmmoUI(WeaponController weapon)
     {
         if(weapon.Model.SlotType == WeaponSlotType.PrimaryWeapon1)
