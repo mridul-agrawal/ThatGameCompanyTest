@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb524b7cbeceae4db858aa209122dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 12
-  cols: 10
-  AOI: 2
+  rows: 6
+  cols: 4
+  AOI: 1
   Row: {fileID: 3703918923452714294, guid: 1ba0eb7cebccac441b6be5f535f771e4, type: 3}
   Tile: {fileID: -7304553062693840452, guid: 55a9754e485ab014cbf20c0b3d1e8f32, type: 3}
 --- !u!1 &1190000160
